@@ -38,20 +38,31 @@ class DatabaseHelper {
       )
       ''');
     await db.execute('''
-      CREATE TABLE course_list(
-          id INTEGER PRIMARY KEY,
-          course_id INTEGER,
-          course_title TEXT,
-          thumbnail TEXT
-      )
+CREATE TABLE Cat (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Category TEXT,
+    price REAL,
+    ranking INTEGER,
+    ty TEXT
+);
+
       ''');
     await db.execute('''
-      CREATE TABLE section_list(
-          id INTEGER PRIMARY KEY,
-          course_id INTEGER,
-          section_id INTEGER,
-          section_title TEXT
-      )
+ CREATE TABLE Worker (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    price REAL
+);
+
+      ''');
+
+    await db.execute('''
+ CREATE TABLE Worker (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    price REAL
+);
+
       ''');
   }
 

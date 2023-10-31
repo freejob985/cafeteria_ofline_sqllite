@@ -1,5 +1,3 @@
-import 'dart:js_util';
-
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -33,8 +31,8 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             Divider(
-              color: Colors.grey,
-              thickness: 2, // تغيير السمك حسب الحاجة
+              color: Color.fromARGB(255, 226, 225, 225),
+              thickness: 1, // تغيير السمك حسب الحاجة
             ),
             ListTile(
               title: Text(
@@ -47,8 +45,8 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             Divider(
-              color: Colors.grey,
-              thickness: 2, // تغيير السمك حسب الحاجة
+              color: Color.fromARGB(255, 226, 225, 225),
+              thickness: 1, // تغيير السمك حسب الحاجة
             ),
             ListTile(
               title: Text(
@@ -61,8 +59,8 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             Divider(
-              color: Colors.grey,
-              thickness: 2, // تغيير السمك حسب الحاجة
+              color: Color.fromARGB(255, 226, 225, 225),
+              thickness: 1, // تغيير السمك حسب الحاجة
             ),
             ListTile(
               title: Text(
@@ -75,8 +73,8 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             Divider(
-              color: Colors.grey,
-              thickness: 2, // تغيير السمك حسب الحاجة
+              color: Color.fromARGB(255, 226, 225, 225),
+              thickness: 1, // تغيير السمك حسب الحاجة
             ),
             ListTile(
               title: Text(
@@ -89,8 +87,8 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             Divider(
-              color: Colors.grey,
-              thickness: 2, // تغيير السمك حسب الحاجة
+              color: Color.fromARGB(255, 226, 225, 225),
+              thickness: 1, // تغيير السمك حسب الحاجة
             ),
             ListTile(
               title: Text(
@@ -103,8 +101,8 @@ class MyDrawer extends StatelessWidget {
               },
             ),
             Divider(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              thickness: 2, // تغيير السمك حسب الحاجة
+              color: Color.fromARGB(255, 226, 225, 225),
+              thickness: 1, // تغيير السمك حسب الحاجة
             ),
             ListTile(
               title: Text(
