@@ -37,6 +37,8 @@ dependencies:
   sqflite: ^2.3.0
   path_provider: ^2.1.1
   provider: ^6.0.5
+  shared_preferences: ^2.2.2
+  another_flushbar: ^1.12.30
 
 dev_dependencies:
   flutter_test:

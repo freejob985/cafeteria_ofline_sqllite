@@ -29,7 +29,8 @@ class Sqlhellper {
     await db.execute('''
  CREATE TABLE 'seat' (
     'id' INTEGER PRIMARY KEY AUTOINCREMENT,
-    'Varieties' TEXT,
+ 'seatx' TEXT,    
+'Varieties' TEXT,
     'amount' TEXT,
     'price' TEXT,
     'check' TEXT,
@@ -74,9 +75,10 @@ CREATE TABLE 'Consumptions' (
     print(" onCreate =====================================");
   }
 
-  readData(String sql) async {
+  Future<List<Map<String, dynamic>>> readData(String sql,
+      [List<dynamic>? arguments]) async {
     Database? mydb = await db;
-    List<Map> response = await mydb!.rawQuery(sql);
+    List<Map<String, dynamic>> response = await mydb!.rawQuery(sql, arguments);
     return response;
   }
 
@@ -205,6 +207,22 @@ CREATE TABLE 'Consumptions' (
 
     return await mydb
         .update(table, data, where: 'id = ?', whereArgs: [data['id']]);
+  }
+
+/*
+  هذا هو تعليق متعدد الأسطر.
+*/
+  Future<void> deleteAllData() async {
+    Database? mydb = await db;
+    List<Map<String, dynamic>> tables = await mydb!
+        .rawQuery("SELECT name FROM sqlite_master WHERE type='table';");
+    print('Test point 1 ::=> tables');
+    for (Map<String, dynamic> table in tables) {
+      String tableName = table['name'];
+      if (tableName != 'android_metadata' && tableName != 'sqlite_sequence') {
+        await mydb!.rawDelete('DELETE FROM $tableName');
+      }
+    }
   }
 
 // SELECT
