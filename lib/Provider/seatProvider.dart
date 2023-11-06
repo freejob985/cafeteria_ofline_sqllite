@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cafeteria_ofline/Models/seat.dart';
+import 'package:cafeteria_ofline/hellper/Constants.dart';
 import 'package:cafeteria_ofline/hellper/function.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/foundation.dart';
@@ -37,24 +38,19 @@ class SeatProvider with ChangeNotifier {
       randomString += chars[random.nextInt(chars.length)];
     }
 
-    return randomString;
+    return "check:$randomString";
   }
 
   void alldata() async {
     await sqlhellper.deleteAllData();
   }
 
+  void allcat() async {
+    await sqlhellper.executeQuery(tableCreationQueries);
+  }
+
   Future<int> seat_new(String reservation) async {
     print('Test point 1 ::=> ${generateRandomString(10)}');
-
-//     'id' INTEGER PRIMARY KEY AUTOINCREMENT,
-//  'seatx' TEXT,
-// 'Varieties' TEXT,
-//     'amount' TEXT,
-//     'price' TEXT,
-//     'check' TEXT,
-//     'computer' TEXT,
-//     'reservation' TEXT
     int ins = await sqlhellper.addData(
         Seat(
             Seatx: reservation,

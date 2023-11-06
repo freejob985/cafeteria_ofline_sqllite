@@ -171,7 +171,7 @@ CREATE TABLE 'Consumptions' (
     }
 
     String conditionString = conditions.join(' AND ');
-    query += ' AND ($conditionString)';
+    query += ' OR ($conditionString)';
 
     results = await mydb!.rawQuery(
       query,
@@ -222,6 +222,22 @@ CREATE TABLE 'Consumptions' (
       if (tableName != 'android_metadata' && tableName != 'sqlite_sequence') {
         await mydb!.rawDelete('DELETE FROM $tableName');
       }
+    }
+  }
+/*
+  هذا هو تعليق متعدد الأسطر.
+*/
+
+  Future<List<Map<String, dynamic>>> executeQuery(String query,
+      [List<dynamic>? params]) async {
+    Database? mydb = await db;
+    if (params != null && params.isNotEmpty) {
+      final List<Map<String, dynamic>> results =
+          await mydb!.rawQuery(query, params);
+      return results;
+    } else {
+      final List<Map<String, dynamic>> results = await mydb!.rawQuery(query);
+      return results;
     }
   }
 

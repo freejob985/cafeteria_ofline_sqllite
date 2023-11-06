@@ -1,5 +1,9 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
+import 'package:cafeteria_ofline/Provider/WorkersProvider.dart';
+import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart' as provider;
+import 'package:provider/provider.dart';
 
 class Workers extends StatefulWidget {
   const Workers({Key? key}) : super(key: key);
@@ -14,6 +18,16 @@ class _WorkersState extends State<Workers> {
 
   List<Map<String, dynamic>> itemList = [];
 
+  Sqlhellper sqlhellper = Sqlhellper();
+  late WorkersProvider _WorkersProvider;
+  void initState() {
+    super.initState();
+    _WorkersProvider =
+        provider.Provider.of<WorkersProvider>(context, listen: false);
+    _WorkersProvider.item_sum();
+    _WorkersProvider.fetchData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -23,86 +37,95 @@ class _WorkersState extends State<Workers> {
           title: const Text('إضافة عمال'),
         ),
         drawer: MyDrawer(),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                controller: _itemController,
-                decoration: InputDecoration(
-                  labelText: 'بند',
-                ),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: _priceController,
-                decoration: InputDecoration(
-                  labelText: 'السعر',
-                ),
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    final String item = _itemController.text;
-                    final double price =
-                        double.tryParse(_priceController.text) ?? 0.0;
-
-                    itemList.add({
-                      "item": item,
-                      "price": price,
-                      "icon": Icons.attach_money,
-                    });
-
-                    _itemController.clear();
-                    _priceController.clear();
-                  });
-                },
-                child: Text('إضافة'),
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: itemList.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: Colors.blue, // Blue background color for the Card
-                      child: Column(
-                        children: <Widget>[
-                          ListTile(
-                            leading: Icon(
-                              itemList[index]["icon"],
-                              color: Colors.white, // White color for the icon
-                            ),
-                            title: Text(
-                              itemList[index]["item"],
-                              style: TextStyle(
-                                  color:
-                                      Colors.white), // White color for the text
+        body: Consumer<WorkersProvider>(
+          builder: (context, itemList, child) {
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextField(
+                    controller: _itemController,
+                    decoration: InputDecoration(
+                      labelText: 'العامل',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  TextField(
+                    controller: _priceController,
+                    decoration: InputDecoration(
+                      labelText: 'السعر',
+                    ),
+                    keyboardType: TextInputType.number,
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      final String item = _itemController.text;
+                      final String price = _priceController.text;
+                      _WorkersProvider.item_new(item, price, context);
+                      _itemController.clear();
+                      _priceController.clear();
+                    },
+                    child: Text('إضافة'),
+                  ),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: itemList.data.length,
+                      itemBuilder: (context, index) {
+                        final item = itemList.data[index];
+                        return GestureDetector(
+                          onTap: () {
+                            _WorkersProvider.showAlertDialog(
+                                context, item['id']);
+                          },
+                          child: Card(
+                            color: Colors
+                                .blue, // Blue background color for the Card
+                            child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  leading: Icon(
+                                    Icons.attach_money,
+                                    color: Colors
+                                        .white, // White color for the icon
+                                  ),
+                                  title: Text(
+                                    item['name'],
+                                    style: TextStyle(
+                                        color: Colors
+                                            .white), // White color for the text
+                                  ),
+                                  trailing: Text(
+                                    item["price"],
+                                    style: TextStyle(color: Colors.white),
+                                    // White color for the text
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.attach_money,
-                      color: Color.fromARGB(255, 61, 5, 150),
+                        );
+                      },
                     ),
-                    onPressed: () {},
                   ),
-                  Text("0"),
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.attach_money,
+                          color: Color.fromARGB(255, 61, 5, 150),
+                        ),
+                        onPressed: () {},
+                      ),
+                      Text(itemList.sum ?? "0"),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
 import 'package:cafeteria_ofline/Models/Cat.dart';
 import 'package:cafeteria_ofline/Provider/seatProvider.dart';
+import 'package:cafeteria_ofline/hellper/SessionManager.dart';
 import 'package:cafeteria_ofline/hellper/function.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/material.dart';
@@ -78,8 +79,10 @@ class _HomeState extends State<Home> {
                               child: Card(
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(context, "Bench");
+                                    SessionManager.setSession(
+                                        'seat', item['seatx']);
 
+                                    Navigator.pushNamed(context, "Bench");
                                   },
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,

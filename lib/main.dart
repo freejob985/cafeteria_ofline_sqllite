@@ -1,3 +1,7 @@
+import 'package:cafeteria_ofline/Provider/BenchProvider.dart';
+import 'package:cafeteria_ofline/Provider/ConsumptionsProvider.dart';
+import 'package:cafeteria_ofline/Provider/WorkersProvider.dart';
+import 'package:cafeteria_ofline/Provider/itemProvider.dart';
 import 'package:cafeteria_ofline/Provider/seatProvider.dart';
 import 'package:cafeteria_ofline/Widget/Accounts.dart';
 import 'package:cafeteria_ofline/Widget/Aggregation.dart';
@@ -21,8 +25,16 @@ class start extends StatelessWidget {
   const start({super.key});
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SeatProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SeatProvider()),
+        ChangeNotifierProvider(create: (_) => BenchProvider()),
+        ChangeNotifierProvider(create: (_) => ItemProvider()),
+        ChangeNotifierProvider(create: (_) => WorkersProvider()),
+        ChangeNotifierProvider(create: (_) => ConsumptionsProvider()),
+
+
+      ],
       child: MaterialApp(
         routes: {
           'Home': (context) => const Home(),

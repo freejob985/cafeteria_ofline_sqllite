@@ -1,5 +1,9 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
+import 'package:cafeteria_ofline/Provider/itemProvider.dart';
+import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart' as provider;
+import 'package:provider/provider.dart';
 
 class Terms extends StatefulWidget {
   const Terms({Key? key}) : super(key: key);
@@ -13,6 +17,15 @@ class _TermsState extends State<Terms> {
   final TextEditingController _priceController = TextEditingController();
 
   List<Map<String, dynamic>> itemList = [];
+
+  Sqlhellper sqlhellper = Sqlhellper();
+  late ItemProvider _ItemProvider;
+  void initState() {
+    super.initState();
+    _ItemProvider = provider.Provider.of<ItemProvider>(context, listen: false);
+    _ItemProvider.item_sum();
+    _ItemProvider.fetchData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,49 +58,56 @@ class _TermsState extends State<Terms> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  setState(() {
-                    final String item = _itemController.text;
-                    final double price =
-                        double.tryParse(_priceController.text) ?? 0.0;
-
-                    itemList.add({
-                      "item": item,
-                      "price": price,
-                      "icon": Icons.attach_money,
-                    });
-
-                    _itemController.clear();
-                    _priceController.clear();
-                  });
+                  final String item = _itemController.text;
+                  final String price = _priceController.text;
+                  _ItemProvider.item_new(item, price, context);
+                  _itemController.clear();
+                  _priceController.clear();
                 },
                 child: Text('إضافة'),
               ),
               const SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: itemList.length,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      color: Colors.blue, // Blue background color for the Card
-                      child: Column(
-                        children: <Widget>[
-                          ListTile(
-                            leading: Icon(
-                              itemList[index]["icon"],
-                              color: Colors.white, // White color for the icon
-                            ),
-                            title: Text(
-                              itemList[index]["item"],
-                              style: TextStyle(
-                                  color:
-                                      Colors.white), // White color for the text
+              Consumer<ItemProvider>(
+                builder: (context, itemList, child) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: itemList.data.length,
+                      itemBuilder: (context, index) {
+                        final item = itemList.data[index];
+                        return GestureDetector(
+                          onTap: () {
+                            _ItemProvider.showAlertDialog(context, item['id']);
+                          },
+                          child: Card(
+                            color: Colors
+                                .blue, // Blue background color for the Card
+                            child: Column(
+                              children: <Widget>[
+                                ListTile(
+                                  leading: Icon(
+                                    Icons.attach_money,
+                                    color: Colors
+                                        .white, // White color for the icon
+                                  ),
+                                  title: Text(
+                                    item["item"],
+                                    style: TextStyle(color: Colors.white),
+                                    // White color for the text
+                                  ),
+                                  trailing: Text(
+                                    item["price"],
+                                    style: TextStyle(color: Colors.white),
+                                    // White color for the text
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
               Row(
                 children: [
@@ -98,7 +118,11 @@ class _TermsState extends State<Terms> {
                     ),
                     onPressed: () {},
                   ),
-                  Text("0"),
+                  Consumer<ItemProvider>(
+                    builder: (context, myType, child) {
+                      return Text(myType.sum);
+                    },
+                  ),
                 ],
               ),
             ],
