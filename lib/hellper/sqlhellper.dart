@@ -29,8 +29,9 @@ class Sqlhellper {
     await db.execute('''
  CREATE TABLE 'seat' (
     'id' INTEGER PRIMARY KEY AUTOINCREMENT,
- 'seatx' TEXT,    
-'Varieties' TEXT,
+    'seatx' TEXT,    
+    'Varieties' TEXT,
+    'Quantity' TEXT,
     'amount' TEXT,
     'price' TEXT,
     'check' TEXT,
@@ -88,11 +89,18 @@ CREATE TABLE 'Consumptions' (
     return response;
   }
 
-  updateData(String sql) async {
-    Database? mydb = await db;
+ Future<int> updateData(String sql, [List<dynamic>? parameters]) async {
+  Database? mydb = await db;
+  
+  if (parameters != null) {
+    int response = await mydb!.rawUpdate(sql, parameters);
+    return response;
+  } else {
     int response = await mydb!.rawUpdate(sql);
     return response;
   }
+}
+
 
   deleteData(String sql) async {
     Database? mydb = await db;

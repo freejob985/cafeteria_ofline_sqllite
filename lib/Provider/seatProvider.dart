@@ -55,6 +55,7 @@ class SeatProvider with ChangeNotifier {
         Seat(
             Seatx: reservation,
             Varieties: "BOOK",
+            Quantity: "1",
             amount: "0",
             price: "0",
             check: generateRandomString(10),

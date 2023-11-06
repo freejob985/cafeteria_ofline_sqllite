@@ -3,17 +3,9 @@ import 'dart:ui';
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:cafeteria_ofline/Provider/seatProvider.dart';
+import 'package:cafeteria_ofline/hellper/Constants.dart';
+import 'package:cafeteria_ofline/hellper/kit.dart';
 import 'package:flutter/material.dart';
-
-TextStyle? TextStyle_(
-    {int fontSize = 10, Color color = const Color.fromARGB(255, 70, 69, 69)}) {
-  return TextStyle(
-    fontSize: fontSize.toDouble(),
-    fontFamily: 'Al-Jazeera',
-    fontWeight: FontWeight.normal,
-    color: color,
-  );
-}
 
 void showNotification(BuildContext context,
     {required String title, required String message, bool success = true}) {
@@ -57,38 +49,45 @@ String generateRandomNumber(int length) {
   return n;
 }
 
-
 void addbook(BuildContext context, SeatProvider databaseProvider) {
   TextEditingController newReservationController = TextEditingController();
 
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('إضافة حجز جديد'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: newReservationController, // تعيين الـ controller هنا
-              decoration: InputDecoration(
-                hintText: 'اسم الحجز',
+      return Directionality(
+        textDirection: TextDirection.rtl,
+        child: AlertDialog(
+          title: Center(
+            child: Text('إضافة حجز جديد',
+                style: TextStyle_(
+                    fontSize: 25,
+                    color: const Color.fromARGB(255, 31, 31, 31))),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Field(
+                  newReservationController, "اكتب اسم الحجز هنا", "اسم الحجز"),
+              SizedBox(height: 20),
+              ElevatedButton(
+                style: ButtonStyle(
+                  elevation: MaterialStateProperty.all<double>(8),
+                  backgroundColor: MaterialStateProperty.all<Color>(pr),
+                ),
+                onPressed: () {
+                  String newReservationName = newReservationController.text;
+                  if (newReservationName.isNotEmpty) {
+                    var x = databaseProvider.seat_new(newReservationName);
+                    //   databaseProvider.alldata();
+                    print(x);
+                  }
+                },
+                child: Text('إضافة',
+                    style: TextStyle_(fontSize: 15, color: Colors.white)),
               ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                String newReservationName = newReservationController.text;
-                print(newReservationName); // الحصول على القيمة
-                if (newReservationName.isNotEmpty) {
-                  var x = databaseProvider.seat_new(newReservationName);
-                  //   databaseProvider.alldata();
-                  print(x);
-                }
-              },
-              child: Text('إضافة'),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     },

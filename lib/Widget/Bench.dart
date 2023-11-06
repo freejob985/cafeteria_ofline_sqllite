@@ -1,4 +1,6 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
+import 'package:cafeteria_ofline/hellper/Constants.dart';
+import 'package:cafeteria_ofline/hellper/kit.dart';
 import 'package:flutter/material.dart';
 import 'package:cafeteria_ofline/Widget/Varieties.dart';
 import 'package:cafeteria_ofline/Widget/reservation.dart';
@@ -39,12 +41,55 @@ class _BenchState extends State<Bench> with SingleTickerProviderStateMixin {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('تطبيق التابات'),
+          backgroundColor: pr,
+          actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "Home");
+                },
+                child: Text('الرئسية',
+                    style: TextStyle(fontFamily: 'Al-Jazeera', fontSize: 15)),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(pr), // تغيير لون الخلفية
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white), // تغيير لون النص
+                )
+
+),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "Accounts");
+              },
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(pr), // تغيير لون الخلفية
+                foregroundColor: MaterialStateProperty.all<Color>(
+                    Colors.white), // تغيير لون النص
+              ),
+              child: Text('الحسابات',
+                  style: TextStyle(fontFamily: 'Al-Jazeera', fontSize: 15)),
+            )
+          ],
+          title: Text(
+            'تطبيق التابات',
+            style: TextStyle_(fontSize: 15, color: Colors.white),
+          ),
           bottom: TabBar(
             controller: _tabController,
-            tabs: const <Widget>[
-              Tab(text: 'الأصناف'),
-              Tab(text: 'الحجوزات'),
+            tabs: <Widget>[
+              Tab(
+                child: Text("الأصناف",
+                    style: TextStyle_(
+                        fontSize: 15,
+                        color: const Color.fromARGB(255, 255, 255, 255))),
+              ),
+              Tab(
+                child: Text("الحجز",
+                    style: TextStyle_(
+                        fontSize: 15,
+                        color: const Color.fromARGB(255, 255, 255, 255))),
+              ),
             ],
           ),
         ),

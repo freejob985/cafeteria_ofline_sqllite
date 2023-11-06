@@ -1,6 +1,7 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
 import 'package:cafeteria_ofline/Models/Cat.dart';
 import 'package:cafeteria_ofline/Provider/seatProvider.dart';
+import 'package:cafeteria_ofline/hellper/Constants.dart';
 import 'package:cafeteria_ofline/hellper/SessionManager.dart';
 import 'package:cafeteria_ofline/hellper/function.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
@@ -31,6 +32,7 @@ class _HomeState extends State<Home> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
           appBar: AppBar(
+              backgroundColor: pr,
               title: Text(
                 'حجز',
                 style: TextStyle_(fontSize: 15, color: Colors.white),
@@ -114,7 +116,7 @@ class _HomeState extends State<Home> {
                           label:
                               Text('حجز جديد', style: TextStyle_(fontSize: 15)),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 );

@@ -1,5 +1,7 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
 import 'package:cafeteria_ofline/Provider/ConsumptionsProvider.dart';
+import 'package:cafeteria_ofline/hellper/Constants.dart';
+import 'package:cafeteria_ofline/hellper/kit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +31,11 @@ class _ConsumptionsState extends State<Consumptions> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('إضافة الاستهلاكات'),
+          backgroundColor: pr,
+          title: Text(
+            'إضافة الاستهلاكات',
+            style: TextStyle_(fontSize: 20, color: Colors.white),
+          ),
         ),
         drawer: MyDrawer(),
         body: Padding(
@@ -37,44 +43,41 @@ class _ConsumptionsState extends State<Consumptions> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextField(
-                controller: _itemController,
-                decoration: InputDecoration(
-                  labelText: 'البند',
-                ),
-              ),
+              Field(_itemController, "البند", "بنود يومية"),
               const SizedBox(height: 20),
-              TextField(
-                controller: _priceController,
-                decoration: InputDecoration(
-                  labelText: 'السعر',
-                ),
-                keyboardType: TextInputType.number,
-              ),
+              Field(_priceController, "السعر", "سعر البند"),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  final String item = _itemController.text;
-                  final String price = _priceController.text;
-                  _ConsumptionsProvider.item_new(item, price, context);
-                  _itemController.clear();
-                  _priceController.clear();
-                },
-                child: Text('إضافة'),
-              ),
+                  onPressed: () {
+                    final String item = _itemController.text;
+                    final String price = _priceController.text;
+                    _ConsumptionsProvider.item_new(item, price, context);
+                    _itemController.clear();
+                    _priceController.clear();
+                  },
+                  child: Text(
+                    'إضافة',
+                    style: TextStyle_(fontSize: 15, color: Colors.white),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(pr),
+// تغيير لون الخلفية
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                        Colors.white), // تغيير لون الخلفية
+                  )),
               const SizedBox(height: 20),
               Expanded(
                 child: Consumer<ConsumptionsProvider>(
                   builder: (context, itemList, child) {
                     return GestureDetector(
                       child: Card(
-                        color: Colors.blue,
+                        elevation: 0,
                         child: ListView.builder(
                           itemCount: itemList.data.length,
                           itemBuilder: (context, index) {
                             final item = itemList.data[index];
                             return Container(
-                              color: const Color.fromARGB(255, 112, 191, 255),
+                              color: pr,
                               child: GestureDetector(
                                 onTap: () {
                                   _ConsumptionsProvider.showAlertDialog(
@@ -87,11 +90,13 @@ class _ConsumptionsState extends State<Consumptions> {
                                   ),
                                   title: Text(
                                     item["consumption"],
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle_(
+                                        fontSize: 15, color: Colors.white),
                                   ),
                                   trailing: Text(
                                     item["price"],
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle_(
+                                        fontSize: 15, color: Colors.white),
                                   ),
                                 ),
                               ),
@@ -109,7 +114,7 @@ class _ConsumptionsState extends State<Consumptions> {
                     builder: (context, myType, child) {
                       return Container(
                         padding: EdgeInsets.all(16.0),
-                        color: Colors.blue,
+                        color: pr,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

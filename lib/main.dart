@@ -1,5 +1,6 @@
 import 'package:cafeteria_ofline/Provider/BenchProvider.dart';
 import 'package:cafeteria_ofline/Provider/ConsumptionsProvider.dart';
+import 'package:cafeteria_ofline/Provider/ReservationProvider.dart';
 import 'package:cafeteria_ofline/Provider/WorkersProvider.dart';
 import 'package:cafeteria_ofline/Provider/itemProvider.dart';
 import 'package:cafeteria_ofline/Provider/seatProvider.dart';
@@ -32,8 +33,7 @@ class start extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ItemProvider()),
         ChangeNotifierProvider(create: (_) => WorkersProvider()),
         ChangeNotifierProvider(create: (_) => ConsumptionsProvider()),
-
-
+        ChangeNotifierProvider(create: (_) => ReservationProvider()),
       ],
       child: MaterialApp(
         routes: {

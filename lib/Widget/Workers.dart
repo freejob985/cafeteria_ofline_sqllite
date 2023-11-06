@@ -1,5 +1,7 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
 import 'package:cafeteria_ofline/Provider/WorkersProvider.dart';
+import 'package:cafeteria_ofline/hellper/Constants.dart';
+import 'package:cafeteria_ofline/hellper/kit.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
@@ -34,7 +36,11 @@ class _WorkersState extends State<Workers> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('إضافة عمال'),
+          backgroundColor: pr,
+          title: Text(
+            'إضافة عمال',
+            style: TextStyle_(fontSize: 20, color: Colors.white),
+          ),
         ),
         drawer: MyDrawer(),
         body: Consumer<WorkersProvider>(
@@ -44,22 +50,26 @@ class _WorkersState extends State<Workers> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  TextField(
-                    controller: _itemController,
-                    decoration: InputDecoration(
-                      labelText: 'العامل',
-                    ),
-                  ),
+                  Field(_itemController, "العامل", "يومية عامل"),
+
+                  // TextField(
+                  //   controller: _itemController,
+                  //   decoration: InputDecoration(
+                  //     labelText: 'العامل',
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
-                  TextField(
-                    controller: _priceController,
-                    decoration: InputDecoration(
-                      labelText: 'السعر',
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
+                  Field(_priceController, "السعر", " السعر",
+                      keyboardType: TextInputType.number),
+
                   const SizedBox(height: 20),
                   ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(pr),
+// تغيير لون الخلفية
+                      foregroundColor: MaterialStateProperty.all<Color>(
+                          Colors.white), // تغيير لون الخلفية
+                    ),
                     onPressed: () {
                       final String item = _itemController.text;
                       final String price = _priceController.text;
@@ -67,7 +77,10 @@ class _WorkersState extends State<Workers> {
                       _itemController.clear();
                       _priceController.clear();
                     },
-                    child: Text('إضافة'),
+                    child: Text(
+                      'إضافة',
+                      style: TextStyle_(fontSize: 15, color: Colors.white),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Expanded(
@@ -93,13 +106,15 @@ class _WorkersState extends State<Workers> {
                                   ),
                                   title: Text(
                                     item['name'],
-                                    style: TextStyle(
+                                    style: TextStyle_(
+                                        fontSize: 15,
                                         color: Colors
                                             .white), // White color for the text
                                   ),
                                   trailing: Text(
                                     item["price"],
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle_(
+                                        fontSize: 15, color: Colors.white),
                                     // White color for the text
                                   ),
                                 ),

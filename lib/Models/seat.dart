@@ -2,6 +2,7 @@ class Seat {
   final int? id;
   final String Seatx;
   final String Varieties;
+  final String Quantity;
   final String amount;
   final String price;
   final String check;
@@ -12,6 +13,7 @@ class Seat {
       {this.id,
       required this.Seatx,
       required this.Varieties,
+      required this.Quantity,
       required this.amount,
       required this.price,
       required this.check,
@@ -22,6 +24,7 @@ class Seat {
         id: json['id'],
         Seatx: json['Seatx'],
         Varieties: json['Varieties'],
+        Quantity: json['Quantity'],
         amount: json['amount'],
         price: json['price'],
         check: json['check'],
@@ -34,6 +37,7 @@ class Seat {
       'id': id,
       'Seatx': Seatx,
       'Varieties': Varieties,
+      'Quantity': Quantity,
       'amount': amount,
       'price': price,
       'check': check,

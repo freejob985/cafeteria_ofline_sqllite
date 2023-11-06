@@ -1,7 +1,9 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
 import 'package:cafeteria_ofline/Provider/seatProvider.dart';
+import 'package:cafeteria_ofline/hellper/Constants.dart';
 import 'package:cafeteria_ofline/hellper/function.dart';
 import 'package:flutter/material.dart';
+import 'package:cafeteria_ofline/hellper/kit.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -40,7 +42,11 @@ class _SettingsState extends State<Settings> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('الإعدادات'),
+          backgroundColor: pr,
+          title: Text(
+            'الإعدادات',
+            style: TextStyle_(fontSize: 20, color: Colors.white),
+          ),
         ),
         drawer: MyDrawer(),
         body: GridView.builder(
@@ -78,10 +84,7 @@ class _SettingsState extends State<Settings> {
                       const SizedBox(height: 10),
                       Text(
                         dummyData[index]['text'],
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
+                        style: TextStyle_(fontSize: 15, color: Colors.white),
                       ),
                     ],
                   ),

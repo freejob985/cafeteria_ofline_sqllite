@@ -13,6 +13,8 @@ class ItemProvider with ChangeNotifier {
       "SELECT *  FROM item ",
     );
     data = fetchedData;
+    sum = "0";
+    item_sum();
     notifyListeners();
     return data;
   }

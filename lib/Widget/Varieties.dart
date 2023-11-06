@@ -1,4 +1,5 @@
 import 'package:cafeteria_ofline/Provider/BenchProvider.dart';
+import 'package:cafeteria_ofline/hellper/SessionManager.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
@@ -21,8 +22,6 @@ class _VarietiesState extends State<Varieties> {
     _BenchProvider.fetchData();
   }
 
-
-
   TextEditingController searchController = TextEditingController();
   List<Map<String, dynamic>> filteredItems = [];
 
@@ -31,8 +30,6 @@ class _VarietiesState extends State<Varieties> {
   //   filteredItems = items;
   //   super.initState();
   // }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +101,10 @@ class _VarietiesState extends State<Varieties> {
                           ),
                         ],
                       ),
-                      onTap: () {
+                      onTap: () async {
+                        String? seat = await SessionManager.getSession('seat');
+                        print('Test point 1 ::=> $seat');
+                        _BenchProvider.addres(item['Category'], seat, context);
                         // Add functionality when the item is tapped
                       },
                     ),

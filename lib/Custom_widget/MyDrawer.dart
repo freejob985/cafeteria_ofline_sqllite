@@ -1,3 +1,4 @@
+import 'package:cafeteria_ofline/hellper/Constants.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -13,7 +14,7 @@ class MyDrawer extends StatelessWidget {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: pr,
               ),
               child: Text(
                 ' القائمة',

@@ -1,5 +1,8 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
 import 'package:cafeteria_ofline/Provider/itemProvider.dart';
+import 'package:cafeteria_ofline/hellper/Constants.dart';
+import 'package:cafeteria_ofline/hellper/kit.dart';
+import 'package:cafeteria_ofline/hellper/function.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as provider;
@@ -33,7 +36,11 @@ class _TermsState extends State<Terms> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('إضافة البنود'),
+          backgroundColor: pr,
+          title: Text(
+            'إضافة البنود',
+            style: TextStyle_(fontSize: 15, color: Colors.white),
+          ),
         ),
         drawer: MyDrawer(),
         body: Padding(
@@ -41,20 +48,10 @@ class _TermsState extends State<Terms> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextField(
-                controller: _itemController,
-                decoration: InputDecoration(
-                  labelText: 'بند',
-                ),
-              ),
+              Field(_itemController, "بند", "اضافة بند جديد"),
               const SizedBox(height: 20),
-              TextField(
-                controller: _priceController,
-                decoration: InputDecoration(
-                  labelText: 'السعر',
-                ),
-                keyboardType: TextInputType.number,
-              ),
+              Field(_priceController, "السعر", "ادخال السعر",
+                  keyboardType: TextInputType.number),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
@@ -64,7 +61,16 @@ class _TermsState extends State<Terms> {
                   _itemController.clear();
                   _priceController.clear();
                 },
-                child: Text('إضافة'),
+                child: Text(
+                  'إضافة',
+                  style: TextStyle_(fontSize: 13, color: Colors.white),
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(pr),
+// تغيير لون الخلفية
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white), // تغيير لون الخلفية
+                ),
               ),
               const SizedBox(height: 20),
               Consumer<ItemProvider>(
@@ -91,12 +97,14 @@ class _TermsState extends State<Terms> {
                                   ),
                                   title: Text(
                                     item["item"],
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle_(
+                                        fontSize: 15, color: Colors.white),
                                     // White color for the text
                                   ),
                                   trailing: Text(
                                     item["price"],
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle_(
+                                        fontSize: 10, color: Colors.white),
                                     // White color for the text
                                   ),
                                 ),
@@ -120,7 +128,11 @@ class _TermsState extends State<Terms> {
                   ),
                   Consumer<ItemProvider>(
                     builder: (context, myType, child) {
-                      return Text(myType.sum);
+                      if (myType.sum == "") {
+                        return Text("0");
+                      } else {
+                        return Text(myType.sum);
+                      }
                     },
                   ),
                 ],

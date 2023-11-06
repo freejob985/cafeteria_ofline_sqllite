@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 String tableCreationQueries = '''
 INSERT INTO `Cat` (`id`, `Category`, `price`, `ranking`, `ty`) VALUES
 (1, 'معسل  ', '5', 18717, 'أساسي'),
@@ -150,3 +152,6 @@ INSERT INTO `Cat` (`id`, `Category`, `price`, `ranking`, `ty`) VALUES
 (215, 'ميلك شيك اريو', '25', 18, 'أساسي'),
 (216, 'ستينج', '15', 1, 'ساقع');
 ''';
+
+
+Color pr = Color.fromARGB(255, 79, 10, 61);
