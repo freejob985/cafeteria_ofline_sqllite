@@ -1,5 +1,6 @@
 import 'package:cafeteria_ofline/Custom_widget/MyDrawer.dart';
 import 'package:cafeteria_ofline/Provider/ReservationProvider.dart';
+import 'package:cafeteria_ofline/Provider/seatProvider.dart';
 import 'package:cafeteria_ofline/hellper/Constants.dart';
 import 'package:cafeteria_ofline/hellper/SessionManager.dart';
 import 'package:cafeteria_ofline/hellper/kit.dart';
@@ -24,50 +25,14 @@ class _AccountsState extends State<Accounts> {
     _ReservationProvider.Accounts_();
   }
 
-  List<Map<String, dynamic>> checkData = [
-    {
-      "name": "شيك 1",
-      "seat": "مقعد 1",
-      "total": 150.0,
-      "icon": Icons.attach_money,
-      "color": Colors.blue,
-    },
-    {
-      "name": "شيك 2",
-      "seat": "مقعد 2",
-      "total": 200.0,
-      "icon": Icons.attach_money,
-      "color": Colors.green,
-    },
-    // ... إضافة المزيد من البيانات حسب الحاجة
-  ];
+
 
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: pr,
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, "Home");
-                },
-                child: Text(
-                  'الرئسية',
-                  style: TextStyle_(fontSize: 15, color: Colors.white),
-                ),
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(pr), // تغيير لون الخلفية
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                      Colors.white), // تغيير لون النص
-                )),
-          ],
-          title: Text('الحسابات',
-              style: TextStyle_(fontSize: 15, color: Colors.white)),
-        ),
+     
         drawer: MyDrawer(),
         body: Directionality(
           textDirection: TextDirection.rtl,
@@ -84,6 +49,8 @@ class _AccountsState extends State<Accounts> {
                         // String check = item['check'];
                         String reservation = item['reservation'].toString();
                         String check = item['check'].toString();
+                        String seatx = item['seatx'].toString();
+
                         String Rows = item['Rows'].toString();
                         return Align(
                           alignment: Alignment.centerRight,
@@ -98,10 +65,18 @@ class _AccountsState extends State<Accounts> {
                                 contentPadding: EdgeInsets.all(8.0),
                                 leading: Icon(Icons.attach_money,
                                     color: Colors.white),
-                                title: Text(
+                                title: seatx.contains('Done')? Text(
                                   "مقعد : $reservation",
                                   style: TextStyle_(
-                                      fontSize: 20, color: Colors.white),
+                                      fontSize: 20, color: Colors.white,
+decoration: TextDecoration.lineThrough),
+
+                                ):Text(
+                                  "مقعد : $reservation",
+                                  style: TextStyle_(
+                                      fontSize: 20, color: Colors.white,
+),
+
                                 ),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,15 +118,8 @@ class _AccountsState extends State<Accounts> {
                   );
                 },
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomButton(Icons.add, "إضافة", Colors.orange),
-                  CustomButton(Icons.delete, "حذف", Colors.red),
-                  CustomButton(Icons.edit, "تعديل", Colors.blue),
-                  CustomButton(Icons.search, "بحث", Colors.green),
-                ],
-              ),
+
+                      
             ],
           ),
         ),
@@ -183,6 +151,14 @@ class CustomButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         primary: color,
       ),
+    );
+  }
+}
+class SecondTab extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text('الصفحة الثانية'),
     );
   }
 }

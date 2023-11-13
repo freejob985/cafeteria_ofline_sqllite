@@ -10,13 +10,16 @@ import 'package:flutter/material.dart';
 void showNotification(BuildContext context,
     {required String title, required String message, bool success = true}) {
   Flushbar(
-    messageText: Text(
-      message,
-      style: const TextStyle(
-        fontSize: 16, // تغيير حجم الخط
-        color: Colors.white, // تغيير لون النص
-        fontWeight: FontWeight.bold,
-        // fontFamily: Jazeera, // تغيير وزن الخط
+    messageText: Directionality(
+textDirection: TextDirection.rtl,
+      child: Text(
+        message,
+        style: const TextStyle(
+          fontSize: 16, // تغيير حجم الخط
+          color: Colors.white, // تغيير لون النص
+          fontWeight: FontWeight.bold,
+              fontFamily: 'Al-Jazeera',
+        ),
       ),
     ),
     icon: success ? const Icon(Icons.check) : const Icon(Icons.error),

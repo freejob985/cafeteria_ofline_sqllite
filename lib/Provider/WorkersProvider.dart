@@ -1,5 +1,6 @@
 import 'package:cafeteria_ofline/Models/Worker.dart';
 import 'package:cafeteria_ofline/hellper/function.dart';
+import 'package:cafeteria_ofline/hellper/kit.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/material.dart';
 
@@ -38,39 +39,44 @@ class WorkersProvider with ChangeNotifier {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("تأكيد الإجراء"),
-          content: Text("هل أنت متأكد من رغبتك في القيام بهذا الإجراء؟"),
-          actions: <Widget>[
-            TextButton(
-              child: Text("نعم"),
-              onPressed: () async {
-                int rowsAffected = await sqlhellper.removeEntry("Worker", id);
-                if (rowsAffected > 0) {
-                  fetchData();
-                  item_sum();
-                  showNotification(context,
-                      title: "", message: " تم الحذف ", success: false);
-                } else {
-                  // print('No entry found with ID: $idToDelete.');
-                }
-                // Close the dialog
-                // Your action when 'Yes' is selected
-                // e.g., call a function, update state, etc.
-              },
-            ),
-            TextButton(
-              child: Text("لا"),
-              onPressed: () {
-                // Perform action when 'No' is selected
-                // For example, you can do something here
-                // You can also close the dialog
-                Navigator.of(context).pop(); // Close the dialog
-                // Your action when 'No' is selected
-                // e.g., do nothing or perform a different action
-              },
-            ),
-          ],
+        return Directionality(
+textDirection: TextDirection.rtl,
+          child: AlertDialog(
+            title: Text("تأكيد الإجراء"),
+            content: Text("هل أنت متأكد من رغبتك في القيام بهذا الإجراء؟" ,
+        style: TextStyle_(fontSize: 15),),
+            actions: <Widget>[
+              TextButton(
+                child: Text("نعم" ,
+        style: TextStyle_(fontSize: 15),),
+                onPressed: () async {
+                  int rowsAffected = await sqlhellper.removeEntry("Worker", id);
+                  if (rowsAffected > 0) {
+                    fetchData();
+                    item_sum();
+                    showNotification(context,
+                        title: "", message: " تم الحذف ", success: false);
+                  } else {
+                    // print('No entry found with ID: $idToDelete.');
+                  }
+                  // Close the dialog
+                  // Your action when 'Yes' is selected
+                  // e.g., call a function, update state, etc.
+                },
+              ),
+              TextButton(
+                child: Text("لا",style: TextStyle_(fontSize: 15),),
+                onPressed: () {
+                  // Perform action when 'No' is selected
+                  // For example, you can do something here
+                  // You can also close the dialog
+                  Navigator.of(context).pop(); // Close the dialog
+                  // Your action when 'No' is selected
+                  // e.g., do nothing or perform a different action
+                },
+              ),
+            ],
+          ),
         );
       },
     );

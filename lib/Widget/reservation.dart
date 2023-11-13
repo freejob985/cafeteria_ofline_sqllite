@@ -152,7 +152,7 @@ class _MyCustomListViewState extends State<MyCustomListView> {
                                       },
                                       child: Center(
                                         child: Text(
-                                          check,
+                                          check.substring(0, 10),
                                           style: TextStyle(fontSize: 9),
                                         ),
                                       ),

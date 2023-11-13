@@ -5,6 +5,7 @@ import 'package:cafeteria_ofline/Provider/WorkersProvider.dart';
 import 'package:cafeteria_ofline/Provider/itemProvider.dart';
 import 'package:cafeteria_ofline/Provider/seatProvider.dart';
 import 'package:cafeteria_ofline/Widget/Accounts.dart';
+import 'package:cafeteria_ofline/Widget/Accounts_mang.dart';
 import 'package:cafeteria_ofline/Widget/Aggregation.dart';
 import 'package:cafeteria_ofline/Widget/Bench.dart';
 import 'package:cafeteria_ofline/Widget/Consumptions.dart';
@@ -21,7 +22,6 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(const start());
 }
-
 class start extends StatelessWidget {
   const start({super.key});
   @override
@@ -48,6 +48,8 @@ class start extends StatelessWidget {
           'Reservation': (context) => Reservation(),
           'Settings': (context) => Settings(),
           'Aggregation': (context) => Aggregation(),
+          'AccountsMang': (context) => AccountsMang(),
+
         },
         initialRoute: 'Home',
         debugShowCheckedModeBanner: false,

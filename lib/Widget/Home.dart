@@ -4,6 +4,7 @@ import 'package:cafeteria_ofline/Provider/seatProvider.dart';
 import 'package:cafeteria_ofline/hellper/Constants.dart';
 import 'package:cafeteria_ofline/hellper/SessionManager.dart';
 import 'package:cafeteria_ofline/hellper/function.dart';
+import 'package:cafeteria_ofline/hellper/kit.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -70,8 +71,8 @@ class _HomeState extends State<Home> {
                               SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent:
                                 MediaQuery.of(context).size.width * 0.4,
-                            crossAxisSpacing: 8.0,
-                            mainAxisSpacing: 8.0,
+                            crossAxisSpacing: 5.0,
+                            mainAxisSpacing: 5.0,
                           ),
                           itemCount: itemProvider.data.length,
                           itemBuilder: (BuildContext context, int index) {
@@ -104,19 +105,136 @@ class _HomeState extends State<Home> {
                           },
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        color: Colors.grey[300],
-                        child: TextButton.icon(
-                          onPressed: () async {
-                            addbook(context, databaseProvider);
-                          },
-                          icon: Icon(Icons
-                              .add), // يمكن تغيير الرمز إلى الأيقونة المطلوبة
-                          label:
-                              Text('حجز جديد', style: TextStyle_(fontSize: 15)),
-                        ),
-                      ),
+                      Consumer<SeatProvider>(
+                          builder: (context, itemProvider, child) {
+                        if (itemProvider.sum1.isEmpty) {
+                          return Center();
+                        } else {
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  elvbtn(
+                                      context: context,
+                                      label:
+                                          "عمال \n  ${itemProvider.sum3.contains('null')? '0' :itemProvider.sum3}  جنيه ",
+                                      buttonColor: Color.fromARGB(255, 90, 173, 27),
+                                      icon: Icon(Icons.monitor_rounded),
+                                      h: 0.15,
+                                      func: () {
+                Navigator.pushNamed(context, "Workers");
+
+}),
+                                  elvbtn(
+                                      context: context,
+                                      label:
+                                          "بنود \n  ${itemProvider.sum2.contains('null')? '0' :itemProvider.sum2}  جنيه ",
+                                      h: 0.15,
+                                      buttonColor: Color.fromARGB(255, 47, 165, 55),
+                                      icon: Icon(Icons.moving),
+                                      func: () {
+                Navigator.pushNamed(context, "Terms");
+
+}),
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  elvbtn(
+                                      context: context,
+                                      label:
+                                          "استهلاكات \n  ${ itemProvider.sum4.contains('null')? '0' :itemProvider.sum4 }  جنيه ",
+                                      h: 0.15,
+                                      buttonColor: Color(0xFF338AFF),
+                                      icon:
+                                          Icon(Icons.edit_notifications_sharp),
+                                      func: () {
+                Navigator.pushNamed(context, "Consumptions");
+
+}),
+                                  elvbtn(
+                                      context: context,
+                                      label:
+                                          "صافي \n  ${itemProvider.sum6.contains('null')? '0' :itemProvider.sum6}  جنيه ",
+                                      h: 0.15,
+                                      buttonColor: Color(0xFF33F0FF),
+                                      icon: Icon(Icons.monetization_on),
+                                      func: () {}),
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  elvbtn(
+                                      context: context,
+                                      label:
+                                          "أجمالي \n  ${itemProvider.sum1}  جنيه ",
+                                      h: 0.15,
+                                      buttonColor:
+                                          Color.fromARGB(255, 17, 101, 211),
+                                      icon: Icon(Icons.ac_unit_outlined),
+                                      func: () {}),
+                                  elvbtn(
+                                      context: context,
+                                      label:
+                                          "أرضية \n  ${itemProvider.sum5}  جنيه ",
+                                      h: 0.15,
+                                      buttonColor:
+                                          Color.fromARGB(255, 17, 209, 223),
+                                      icon: Icon(Icons.access_alarm_outlined),
+                                      func: () {}),
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  elvbtn(
+                                      context: context,
+                                      label:
+                                          "تم حساب \n  ${ itemProvider.sum7.contains('null')? '0' :itemProvider.sum7 }  جنيه ",
+                                      h: 0.15,
+                                      buttonColor:
+                                          Color.fromARGB(255, 6, 53, 114),
+                                      icon: Icon(Icons.ac_unit_outlined),
+                                      func: () {}),
+                                  elvbtn(
+                                      context: context,
+                                      label:
+                                          "عجز \n  ${itemProvider.sum5}  جنيه ",
+                                      h: 0.15,
+                                      buttonColor:
+                                          Color.fromARGB(255, 9, 126, 134),
+                                      icon: Icon(Icons.access_alarm_outlined),
+                                      func: () {}),
+                                ],
+                              ),
+                            ],
+                          );
+                        }
+                      }),
+                      SizedBox(height: 2),
+                      // Container(
+                      //   width: double.infinity,
+                      //   color: Colors.grey[300],
+                      //   child: TextButton.icon(
+                      //     onPressed: () async {
+                      //       addbook(context, databaseProvider);
+                      //     },
+                      //     icon: Icon(Icons
+                      //         .add), // يمكن تغيير الرمز إلى الأيقونة المطلوبة
+                      //     label:
+                      //         Text('حجز جديد', style: TextStyle_(fontSize: 15)),
+                      //   ),
+                      // ),
                     ],
                   ),
                 );

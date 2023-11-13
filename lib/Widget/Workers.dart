@@ -36,6 +36,22 @@ class _WorkersState extends State<Workers> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
+   actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "Home");
+                },
+                child: Text(
+                  'الرئسية',
+                  style: TextStyle_(fontSize: 15, color: Colors.white),
+                ),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(pr), // تغيير لون الخلفية
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white), // تغيير لون النص
+                )),
+          ],
           backgroundColor: pr,
           title: Text(
             'إضافة عمال',
@@ -94,8 +110,7 @@ class _WorkersState extends State<Workers> {
                                 context, item['id']);
                           },
                           child: Card(
-                            color: Colors
-                                .blue, // Blue background color for the Card
+                            color: pr, // Blue background color for the Card
                             child: Column(
                               children: <Widget>[
                                 ListTile(

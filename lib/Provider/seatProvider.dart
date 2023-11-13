@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:cafeteria_ofline/Models/seat.dart';
 import 'package:cafeteria_ofline/hellper/Constants.dart';
-import 'package:cafeteria_ofline/hellper/function.dart';
 import 'package:cafeteria_ofline/hellper/sqlhellper.dart';
 import 'package:flutter/foundation.dart';
 
@@ -11,6 +10,14 @@ class SeatProvider with ChangeNotifier {
   List<Map<String, dynamic>> data = [];
   List<Map<String, dynamic>> get data_ => data;
 
+  String sum1 = "0";
+  String sum2 = "0";
+  String sum3 = "0";
+  String sum4 = "0" ?? "0";
+  String sum5 = "0";
+
+  String sum6 = "0";
+  String sum7 = "0";
   // Future<List<Map<String, dynamic>>> fetchData() async {
   //   List<Map<String, dynamic>> fetchedData = await sqlhellper.readData(
   //       "SELECT DISTINCT  seatx FROM seat    where NOT    seatx  =  ?",
@@ -24,6 +31,7 @@ class SeatProvider with ChangeNotifier {
       "SELECT DISTINCT seatx FROM seat WHERE seatx IS NOT 'Done' ",
     );
     data = fetchedData;
+    item_sum();
     notifyListeners();
     return data;
   }
@@ -71,5 +79,50 @@ class SeatProvider with ChangeNotifier {
       print(2);
       return 2;
     }
+  }
+
+  void item_sum() async {
+    List<Map<String, dynamic>> fetchedData = await sqlhellper.readData(
+      "select sum(price) from seat",
+    );
+
+    List<Map<String, dynamic>> fetchedData2 = await sqlhellper.readData(
+      "select sum(price) from item",
+    );
+
+    List<Map<String, dynamic>> fetchedData3 = await sqlhellper.readData(
+      "select sum(price) from Worker",
+    );
+
+    List<Map<String, dynamic>> fetchedData4 = await sqlhellper.readData(
+      "select sum(price) from Consumptions",
+    );
+    List<Map<String, dynamic>> fetchedData5 = await sqlhellper.readData(
+        "select sum(price) from seat    where NOT  seatx  =  ?", ["Done"]);
+
+    List<Map<String, dynamic>> fetchedData7 = await sqlhellper.readData(
+        "select sum(price) from seat    where   seatx  =  ?", ["Done"]);
+// select sum(Total) from a77    where NOT  seat  =  ?
+    sum1 = fetchedData[0]['sum(price)'].toString() ?? "0";
+    sum2 = fetchedData2[0]['sum(price)'].toString() ?? "0";
+    sum3 = fetchedData3[0]['sum(price)'].toString() ?? "0";
+    sum4 = fetchedData4[0]['sum(price)'].toString() ?? '0';
+    sum5 = fetchedData5[0]['sum(price)'].toString() ?? "0";
+    sum5 = fetchedData5[0]['sum(price)'].toString() ?? "0";
+    sum7 = fetchedData7[0]['sum(price)'].toString() ?? "0";
+    // double item = double.parse(sum2);
+    // double Consumptions = double.parse(sum4.replaceAll(RegExp(r'[^0-9.]'),'' )??0;
+
+// debugPrint("$sum4"+"sssssss");
+double? Consumptions = double.tryParse(sum4) ?? 0;
+
+double? Worker = double.tryParse(sum3) ?? 0;
+
+double? item = double.tryParse(sum2) ?? 0;
+double? all = double.tryParse(sum5) ?? 0;
+
+    double all_ = item + Consumptions + Worker - all;
+    sum6 = all_.toString();
+    notifyListeners();
   }
 }

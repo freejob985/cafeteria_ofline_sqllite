@@ -41,3 +41,35 @@ TextStyle? TextStyle_({
     decoration: decoration, // استخدام القيمة الاختيارية هنا
   );
 }
+
+ElevatedButton elvbtn({
+  required BuildContext context,
+  VoidCallback? func,
+  String label = 'Button',
+  double w = 0.45,
+  double h = 0.30,
+double fontSize = 15,
+  Icon icon = const Icon(Icons.access_alarm),
+  Color buttonColor = Colors.green,
+  String? font_ = "Al-Jazeera",
+}) {
+  return ElevatedButton.icon(
+    onPressed: func,
+    icon: icon, // إضافة الأيقونة المحددة للزر
+    label: Text(
+      textAlign: TextAlign.center,
+      label,
+      style: TextStyle(
+        fontFamily: font_,
+        fontSize: fontSize,
+      ),
+    ), // استخدام label كنص للزر
+    style: ElevatedButton.styleFrom(
+      fixedSize: Size(
+        MediaQuery.of(context).size.width * w,
+        MediaQuery.of(context).size.width * h,
+      ), // تعيين الحجم بناءً على عرض الشاشة
+      primary: buttonColor, // تغيير لون الزر
+    ),
+  );
+}

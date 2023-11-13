@@ -42,7 +42,7 @@ class MyDrawer extends StatelessWidget {
               ),
               leading: Icon(Icons.account_box), // Icon for accounts
               onTap: () {
-                Navigator.pushNamed(context, "Accounts");
+                Navigator.pushNamed(context, "AccountsMang");
               },
             ),
             Divider(

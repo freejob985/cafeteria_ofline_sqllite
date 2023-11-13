@@ -31,6 +31,22 @@ class _ConsumptionsState extends State<Consumptions> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
+   actions: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, "Home");
+                },
+                child: Text(
+                  'الرئسية',
+                  style: TextStyle_(fontSize: 15, color: Colors.white),
+                ),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(pr), // تغيير لون الخلفية
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                      Colors.white), // تغيير لون النص
+                )),
+          ],
           backgroundColor: pr,
           title: Text(
             'إضافة الاستهلاكات',
