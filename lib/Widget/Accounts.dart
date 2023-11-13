@@ -21,11 +21,17 @@ class _AccountsState extends State<Accounts> {
     super.initState();
     _ReservationProvider =
         provider.Provider.of<ReservationProvider>(context, listen: false);
-    print('Test point 1 ::=> $_ReservationProvider');
+    // print('Test point 1 ::=> $_ReservationProvider');
     _ReservationProvider.Accounts_();
   }
 
+//   void dispose() {
+//     // تحرير الموارد عند إغلاق الواجهة
+//     _ReservationProvider.dispose();
+// _ReservationProvider.dispose();
 
+//     super.dispose();
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +61,7 @@ class _AccountsState extends State<Accounts> {
                         return Align(
                           alignment: Alignment.centerRight,
                           child: Card(
-                            color: Color.fromARGB(255, 54, 11, 110),
+                            color:seatx.contains('Done')? Color.fromARGB(255, 54, 11, 110) :Color.fromARGB(255, 30, 10, 56),
                             child: GestureDetector(
                               onTap: () {
 // I/flutter ( 2669): Test point fetchedData ::=> [{Rows: 115, check: check:5592162143, reservation: 2}]

@@ -8,6 +8,7 @@ import 'package:cafeteria_ofline/Widget/Accounts.dart';
 import 'package:cafeteria_ofline/Widget/Accounts_mang.dart';
 import 'package:cafeteria_ofline/Widget/Aggregation.dart';
 import 'package:cafeteria_ofline/Widget/Bench.dart';
+import 'package:cafeteria_ofline/Widget/Casher.dart';
 import 'package:cafeteria_ofline/Widget/Consumptions.dart';
 import 'package:cafeteria_ofline/Widget/Home.dart';
 import 'package:cafeteria_ofline/Widget/Settings.dart';
@@ -49,7 +50,7 @@ class start extends StatelessWidget {
           'Settings': (context) => Settings(),
           'Aggregation': (context) => Aggregation(),
           'AccountsMang': (context) => AccountsMang(),
-
+          'Casher': (context) => Casher(),
         },
         initialRoute: 'Home',
         debugShowCheckedModeBanner: false,

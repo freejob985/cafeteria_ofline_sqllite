@@ -119,9 +119,9 @@ double? Consumptions = double.tryParse(sum4) ?? 0;
 double? Worker = double.tryParse(sum3) ?? 0;
 
 double? item = double.tryParse(sum2) ?? 0;
-double? all = double.tryParse(sum5) ?? 0;
-
-    double all_ = item + Consumptions + Worker - all;
+double? all = double.tryParse(sum7) ?? 0;
+double x =item + Consumptions + Worker;
+    double all_ =  all-x;
     sum6 = all_.toString();
     notifyListeners();
   }

@@ -23,6 +23,15 @@ class _NewRegistrationState extends State<NewRegistration> {
     _ReservationProvider.new_computer();
   }
 
+
+ void dispose() {
+    _ReservationProvider.dispose();
+//  _ConsumptionsProvider.dispose(); // 
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     var _ReservationProvider =

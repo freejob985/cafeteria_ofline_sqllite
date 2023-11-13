@@ -24,11 +24,24 @@ class _WorkersState extends State<Workers> {
   late WorkersProvider _WorkersProvider;
   void initState() {
     super.initState();
-    _WorkersProvider =
-        provider.Provider.of<WorkersProvider>(context, listen: false);
+    _WorkersProvider =provider.Provider.of<WorkersProvider>(context, listen: false);
     _WorkersProvider.item_sum();
     _WorkersProvider.fetchData();
   }
+
+  void dispose() {
+    // تحرير الموارد عند إغلاق الواجهة
+    _WorkersProvider.dispose();
+_WorkersProvider.dispose();
+_priceController.dispose();
+
+_itemController.dispose();
+_priceController.dispose();
+    super.dispose();
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {

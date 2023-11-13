@@ -42,7 +42,7 @@ class _ReservationState extends State<Reservation> {
           GestureDetector(
             onTap: () {
               _ReservationProvider.seatx_done(context);
-              print('Test point 1 ::=> 1');
+              // print('Test point 1 ::=> 1');
             },
             child: Container(
               padding: EdgeInsets.all(16),
@@ -275,4 +275,5 @@ class _MyCustomListViewState extends State<MyCustomListView> {
           },
         ));
   }
+
 }

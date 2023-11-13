@@ -24,7 +24,12 @@ class _ConsumptionsState extends State<Consumptions> {
     _ConsumptionsProvider.item_sum();
     _ConsumptionsProvider.fetchData();
   }
-
+ void dispose() {
+    _ConsumptionsProvider.dispose();
+ _itemController.dispose(); // 
+ _ConsumptionsProvider.dispose(); // 
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Directionality(

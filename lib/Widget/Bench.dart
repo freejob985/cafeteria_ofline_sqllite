@@ -22,6 +22,8 @@ class _BenchState extends State<Bench> with SingleTickerProviderStateMixin {
     _tabController.addListener(_handleTabSelection);
   }
 
+
+
   void _handleTabSelection() {
     if (_tabController.indexIsChanging) {
       print("تم تغيير التبويب إلى: ${_tabController.index}");
@@ -30,10 +32,7 @@ class _BenchState extends State<Bench> with SingleTickerProviderStateMixin {
   }
 
   @override
-  void dispose() {
-    _tabController.dispose(); // يجب التخلص من الـ TabController عند الانتهاء
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +58,7 @@ class _BenchState extends State<Bench> with SingleTickerProviderStateMixin {
 ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "Accounts");
+                Navigator.pushNamed(context, "AccountsMang");
               },
               style: ButtonStyle(
                 backgroundColor:

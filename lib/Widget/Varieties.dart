@@ -15,12 +15,27 @@ class Varieties extends StatefulWidget {
 class _VarietiesState extends State<Varieties> {
   Sqlhellper sqlhellper = Sqlhellper();
   late BenchProvider _BenchProvider;
+// void dispose(){
+// super.dispose();
+// _BenchProvider.dispose();
+// }
+
   void initState() {
     super.initState();
     _BenchProvider =
         provider.Provider.of<BenchProvider>(context, listen: false);
     _BenchProvider.fetchData();
   }
+
+//   void dispose() {
+//     // تحرير الموارد عند إغلاق الواجهة
+
+// // _itemController.dispose();
+// // _priceController.dispose();
+// _BenchProvider.dispose();
+//     super.dispose();
+    
+//   }
 
   TextEditingController searchController = TextEditingController();
   List<Map<String, dynamic>> filteredItems = [];
@@ -86,7 +101,7 @@ class _VarietiesState extends State<Varieties> {
                               child: Text(
                                 item['Category'],
                                 style: TextStyle_(fontSize: 15),
-textAlign: TextAlign.center,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                             ElevatedButton(
@@ -95,8 +110,8 @@ textAlign: TextAlign.center,
                               },
                               child: Text(
                                 item['price'],
-                                style:
-                                    TextStyle_(fontSize: 8, color: Colors.white),
+                                style: TextStyle_(
+                                    fontSize: 8, color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.green, // Change color as needed
@@ -106,9 +121,11 @@ textAlign: TextAlign.center,
                           ],
                         ),
                         onTap: () async {
-                          String? seat = await SessionManager.getSession('seat');
+                          String? seat =
+                              await SessionManager.getSession('seat');
                           print('Test point 1 ::=> $seat');
-                          _BenchProvider.addres(item['Category'], seat, context);
+                          _BenchProvider.addres(
+                              item['Category'], seat, context);
                           // Add functionality when the item is tapped
                         },
                       ),
@@ -118,13 +135,15 @@ textAlign: TextAlign.center,
               ),
             ),
             SingleChildScrollView(
-scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.horizontal,
               child: Padding(
                 padding: const EdgeInsets.all(0.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-SizedBox(width: 5,),
+                    SizedBox(
+                      width: 5,
+                    ),
                     ElevatedButton.icon(
                       onPressed: () {
                         _BenchProvider.sec("أساسي");
@@ -138,7 +157,9 @@ SizedBox(width: 5,),
                         primary: Colors.blue,
                       ),
                     ),
-SizedBox(width: 5,),
+                    SizedBox(
+                      width: 5,
+                    ),
                     ElevatedButton.icon(
                       onPressed: () {
                         _BenchProvider.sec(
@@ -155,7 +176,9 @@ SizedBox(width: 5,),
                         primary: Colors.red,
                       ),
                     ),
-SizedBox(width: 5,),
+                    SizedBox(
+                      width: 5,
+                    ),
                     ElevatedButton.icon(
                       onPressed: () {
                         _BenchProvider.sec("سخن");
@@ -170,7 +193,9 @@ SizedBox(width: 5,),
                         primary: Colors.green,
                       ),
                     ),
-SizedBox(width: 5,),
+                    SizedBox(
+                      width: 5,
+                    ),
                     ElevatedButton.icon(
                       onPressed: () {
                         _BenchProvider.sec("عصائر");

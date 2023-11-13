@@ -35,7 +35,11 @@ class _SettingsState extends State<Settings> {
     _seatProvider = SeatProvider(); // Initialize your provider
 // Fetch data from the provider
   }
-
+ void dispose() {
+    _seatProvider.dispose();
+//  _ConsumptionsProvider.dispose(); // 
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -67,7 +71,6 @@ class _SettingsState extends State<Settings> {
                   showNotification(context,
                       title: "", message: " تم اضافة جميع الأصناف  ");
                 }
-                print('Test point 1 ::=> $index');
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

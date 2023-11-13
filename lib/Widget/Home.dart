@@ -18,14 +18,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   double font = 10;
-  Sqlhellper sqlhellper = Sqlhellper();
   late SeatProvider _seatProvider; // تعريف الـ Provider
   void initState() {
     super.initState();
     _seatProvider = Provider.of<SeatProvider>(context, listen: false);
     _seatProvider.fetchData(); // جلب البيانات من الـ Provider
   }
-
+  void dispose() {
+    // تحرير الموارد عند إغلاق الواجهة
+    _seatProvider.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final databaseProvider = Provider.of<SeatProvider>(context);

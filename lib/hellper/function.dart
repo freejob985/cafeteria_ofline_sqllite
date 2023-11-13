@@ -6,6 +6,7 @@ import 'package:cafeteria_ofline/Provider/seatProvider.dart';
 import 'package:cafeteria_ofline/hellper/Constants.dart';
 import 'package:cafeteria_ofline/hellper/kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void showNotification(BuildContext context,
     {required String title, required String message, bool success = true}) {
@@ -82,8 +83,8 @@ void addbook(BuildContext context, SeatProvider databaseProvider) {
                   String newReservationName = newReservationController.text;
                   if (newReservationName.isNotEmpty) {
                     var x = databaseProvider.seat_new(newReservationName);
-                    //   databaseProvider.alldata();
-                    print(x);
+                     Navigator.of(context).pop();
+
                   }
                 },
                 child: Text('إضافة',

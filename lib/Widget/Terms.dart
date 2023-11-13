@@ -30,6 +30,16 @@ class _TermsState extends State<Terms> {
     _ItemProvider.fetchData();
   }
 
+  void dispose() {
+    // تحرير الموارد عند إغلاق الواجهة
+    _ItemProvider.dispose();
+_itemController.dispose();
+_priceController.dispose();
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Directionality(

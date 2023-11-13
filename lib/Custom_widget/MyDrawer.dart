@@ -104,6 +104,16 @@ class MyDrawer extends StatelessWidget {
             Divider(
               color: Color.fromARGB(255, 226, 225, 225),
               thickness: 1, // تغيير السمك حسب الحاجة
+            ),    ListTile(
+              title: Text(
+                'درج',
+                style: TextStyle_(fontSize: 15),
+              ),
+
+              leading: Icon(Icons.motion_photos_on_outlined), // Icon for consumptions
+              onTap: () {
+                Navigator.pushNamed(context, "Casher");
+              },
             ),
             ListTile(
               title: Text(

@@ -29,7 +29,7 @@ class BenchProvider with ChangeNotifier {
         'select * from Cat where Category like ? or ty like ?  ',
         ['%$key%', '%$key%']);
     data = fetchedData;
-    print(data);
+    // print(data);
     notifyListeners();
     return data;
   }
@@ -40,7 +40,7 @@ class BenchProvider with ChangeNotifier {
     List<Map<String, dynamic>> fetchedData = await sqlhellper
         .readData('select * from Cat where  ty like ?  ', ['%$key%']);
     data = fetchedData;
-    print(data);
+    // print(data);
     notifyListeners();
     return data;
   }

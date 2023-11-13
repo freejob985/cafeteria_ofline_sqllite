@@ -117,7 +117,7 @@ class ReservationProvider with ChangeNotifier {
 
   Future<List<Map<String, dynamic>>> Accounts_() async {
     final sql =
-        "SELECT SUM(`price`) AS `Rows`, * FROM `seat` GROUP BY `check` ORDER BY `check`";
+        "SELECT SUM(`price`) AS `Rows`, * FROM `seat` GROUP BY `check` ORDER BY `seatx`";
     List<Map<String, dynamic>> fetchedData = await sqlhellper.readData(sql);
     print('Test point fetchedData ::=> $fetchedData');
     data = fetchedData;

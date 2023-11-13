@@ -4,7 +4,7 @@ import 'package:cafeteria_ofline/Widget/details.dart';
 import 'package:cafeteria_ofline/hellper/Constants.dart';
 import 'package:cafeteria_ofline/hellper/kit.dart';
 import 'package:flutter/material.dart';
-    
+
 class AccountsMang extends StatefulWidget {
   const AccountsMang({Key? key}) : super(key: key);
 
@@ -13,26 +13,28 @@ class AccountsMang extends StatefulWidget {
 }
 
 class _AccountsMangState extends State<AccountsMang> {
- int _currentIndex = 0;
+  int _currentIndex = 0;
 
   // قائمة بالصفحات المختلفة التي سيتم التبديل بينها
   final List<Widget> _children = [
     Accounts(),
     Details(),
   ];
+
   void onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
-textDirection: TextDirection.rtl,
+      textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: AppBar(
-       backgroundColor: pr,
-   actions: [
+          backgroundColor: pr,
+          actions: [
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, "Home");
@@ -50,21 +52,25 @@ textDirection: TextDirection.rtl,
           ],
           title: const Text(''),
         ),
-      drawer: MyDrawer(),
+        drawer: MyDrawer(),
         body: Directionality(
-    textDirection: TextDirection.rtl,
-    child: _children[_currentIndex]),
+            textDirection: TextDirection.rtl, child: _children[_currentIndex]),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: onTabTapped, // دالة يتم استدعاؤها عند النقر على التبويب
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home ,size: 40,),
- label: '',
+              icon: Icon(
+                Icons.home,
+                size: 40,
+              ),
+              label: '',
             ),
             BottomNavigationBarItem(
-                           icon: Icon(Icons.bookmark_add_sharp ,size: 40,),
-
+              icon: Icon(
+                Icons.bookmark_add_sharp,
+                size: 40,
+              ),
               label: '',
             ),
           ],
